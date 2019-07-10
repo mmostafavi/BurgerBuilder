@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import Aux from "../../hoc/Auxilliary";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
+import Modal from "../../components/UI/Modal/Modal";
+import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 
 const GREDIENT_PRICES = {
   meat: 1.4,
@@ -14,12 +16,14 @@ const GREDIENT_PRICES = {
 class BurgerBuilder extends Component {
   state = {
     ingredients: {
-      salad: 1,
+      salad: 0,
       bacon: 0,
       cheese: 0,
       meat: 0
     },
-    totalPrice: 4
+    totalPrice: 4,
+    unPurchasable: true,
+    purchasing: false
   };
   render() {
     const disabledInfo = {
@@ -32,16 +36,37 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
+        <Modal
+          show={this.state.purchasing}
+          modalClosed={this.purchaseCancelHandler}
+        >
+          <OrderSummary
+            ingredients={this.state.ingredients}
+            purchaseCancelled={this.purchaseCancelHandler}
+            purchaseContinued={this.purchaseContinueHandler}
+            price={this.state.totalPrice}
+          />
+        </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls
           ingredientAdded={this.addIngredientHandler}
           ingredientRemoved={this.removeIngredientHandler}
           disabled={disabledInfo}
           price={this.state.totalPrice}
+          unPurchasable={this.state.unPurchasable}
+          ordered={this.purchaseHandler}
         />
       </Aux>
     );
   }
+
+  updateUnPurchasable = ingredients => {
+    const sum = Object.keys(ingredients)
+      .map(igkey => ingredients[igkey])
+      .reduce((sum, el) => sum + el, 0);
+
+    this.setState({ unPurchasable: sum === 0 });
+  };
 
   addIngredientHandler = type => {
     const oldCount = this.state.ingredients[type];
@@ -53,6 +78,7 @@ class BurgerBuilder extends Component {
     };
     updatedIngredients[type] = newCount;
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.updateUnPurchasable(updatedIngredients);
   };
 
   removeIngredientHandler = type => {
@@ -66,6 +92,19 @@ class BurgerBuilder extends Component {
     };
     updatedIngredients[type] = newCount;
     this.setState({ ingredients: updatedIngredients, totalPrice: newPrice });
+    this.updateUnPurchasable(updatedIngredients);
+  };
+
+  purchaseHandler = () => {
+    this.setState({ purchasing: true });
+  };
+
+  purchaseCancelHandler = () => {
+    this.setState({ purchasing: false });
+  };
+
+  purchaseContinueHandler = () => {
+    alert("You continued!");
   };
 }
 
