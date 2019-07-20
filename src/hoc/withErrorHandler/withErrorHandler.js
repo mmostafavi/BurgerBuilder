@@ -9,7 +9,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
       error: null
     };
 
-    componentWillMount() {
+    constructor(props) {
+      super(props);
       this.reqInstance = axios.interceptors.request.use(req => {
         this.setState({ error: null });
         return req;
@@ -39,7 +40,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
           >
             {this.state.error ? this.state.error.message : null}
           </Modal>
-          <WrappedComponent />
+          <WrappedComponent {...this.props} />
         </Aux>
       );
     }

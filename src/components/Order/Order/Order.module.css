@@ -1,0 +1,15 @@
+.Order {
+  width: 80%;
+  margin: 0.625rem auto;
+  padding: 0.625rem;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 4px #ccc;
+  text-align: center;
+}
+
+@media (min-width: 37.5rem) {
+  .Order {
+    width: 30rem;
+  }
+}

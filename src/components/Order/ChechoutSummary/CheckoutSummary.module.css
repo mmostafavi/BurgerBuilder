@@ -1,0 +1,16 @@
+.CheckoutSummary {
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+.Burger {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+@media (min-width: 37.5em) {
+  .CheckoutSummary {
+    width: 30rem;
+  }
+}

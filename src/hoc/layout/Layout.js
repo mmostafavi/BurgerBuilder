@@ -21,7 +21,6 @@ class Layout extends Component {
           show={this.state.show}
           backDropClickHandler={this.backDropClickHandler}
         />
-        <div>Toolbar , sidebar</div>
         <main className={styles.content}>{this.props.children}</main>
       </Aux>
     );
