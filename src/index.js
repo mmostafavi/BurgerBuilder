@@ -8,6 +8,7 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
 import burger from "./store/reducers/burger";
+import form from "./store/reducers/form";
 
 const app = (
   <BrowserRouter>
@@ -16,7 +17,8 @@ const app = (
 );
 
 const rootReducer = combineReducers({
-  burger: burger
+  burger,
+  form
 });
 
 const store = createStore(rootReducer);
