@@ -4,7 +4,8 @@ const initialState = {
     totalPrice: 4,
     ingredients: null,
     unPurchasable: true,
-    error: false
+    error: false,
+    building: false
 };
 
 const GREDIENT_PRICES = {
@@ -38,7 +39,8 @@ const reducer = (state = initialState, action) => {
                     [action.ingType]: updatedIngredients[action.ingType]
                 },
                 totalPrice: updatedPrice,
-                unPurchasable: updatedUnPurchasable
+                unPurchasable: updatedUnPurchasable,
+                building: true
             };
 
         case actionTypes.ING_REMOVED:
@@ -58,7 +60,8 @@ const reducer = (state = initialState, action) => {
                     [action.ingType]: updatedIngredients[action.ingType]
                 },
                 totalPrice: updatedPrice,
-                unPurchasable: updatedUnPurchasable
+                unPurchasable: updatedUnPurchasable,
+                building: true
             };
 
         case actionTypes.INIT_INGREDIENTS:

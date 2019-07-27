@@ -9,25 +9,25 @@ import Aux from "../../../hoc/Auxiliary/Auxilliary";
 // console.log("[sideDrawer.js] ... ", showBackDrop);
 
 const sideDrawer = props => {
-  return (
-    <Aux>
-      <BackDrop clicked={props.backDropClickHandler} show={props.show} />
-      <div
-        className={[
-          styles.SideDrawer,
-          props.show ? styles.open : styles.close
-        ].join(" ")}
-      >
-        <div className={styles.Logo}>
-          <Logo />
-        </div>
+    return (
+        <Aux>
+            <BackDrop clicked={props.backDropClickHandler} show={props.show} />
+            <div
+                className={[
+                    styles.SideDrawer,
+                    props.show ? styles.open : styles.close
+                ].join(" ")}
+            >
+                <div className={styles.Logo}>
+                    <Logo />
+                </div>
 
-        <nav>
-          <NavigationItems />
-        </nav>
-      </div>
-    </Aux>
-  );
+                <nav>
+                    <NavigationItems isAuth={props.isAuth} />
+                </nav>
+            </div>
+        </Aux>
+    );
 };
 
 export default sideDrawer;

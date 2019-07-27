@@ -1,4 +1,5 @@
 export { ingAdded, ingRemoved, initIngredients } from "./burgerBuilder";
+
 export {
     orderSubmited,
     purchaseBurgerFailed,
@@ -6,3 +7,10 @@ export {
     purchaseBurgerSucceed,
     fetchOrders
 } from "./order";
+
+export {
+    authentication,
+    authLogout,
+    setAuthRedirectPath,
+    checkAuth
+} from "./auth";

@@ -13,7 +13,7 @@ class Orders extends Component {
     };
 
     componentDidMount() {
-        this.props.fetchOrders();
+        this.props.fetchOrders(this.props.token, this.props.userId);
     }
 
     render() {
@@ -41,13 +41,16 @@ class Orders extends Component {
 
 const mapStateToProps = state => {
     return {
-        results: state.order.results
+        results: state.order.results,
+        token: state.auth.token || localStorage.getItem("idToken"),
+        userId: state.auth.userId
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchOrders: () => dispatch(actionCreators.fetchOrders())
+        fetchOrders: (token, userId) =>
+            dispatch(actionCreators.fetchOrders(token, userId))
     };
 };
 

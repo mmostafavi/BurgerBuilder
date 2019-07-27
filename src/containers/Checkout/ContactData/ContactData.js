@@ -138,7 +138,9 @@ class ContactData extends Component {
                         this.props.orderHandler(
                             this.state.orderForm,
                             this.props.ingredients,
-                            this.props.price.toFixed(2)
+                            this.props.price.toFixed(2),
+                            this.props.userId,
+                            this.props.token
                         )
                     }
                 >
@@ -170,27 +172,38 @@ class ContactData extends Component {
         return isValid;
     };
 
-    inputChangedHandler = (event, id) => {
-        const updatedOrderForm = Object.assign({}, this.state.orderForm);
-        const element = updatedOrderForm[id];
-        element.value = event.target.value;
-        element.touched = true;
+    inputChangedHandler = (event, elementIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.orderForm,
+            [elementIdentifier]: {
+                ...this.state.orderForm[elementIdentifier],
+                elementConfig: {
+                    ...this.state.orderForm[elementIdentifier].elementConfig
+                },
+                validation: {
+                    ...this.state.orderForm[elementIdentifier].validation
+                }
+            }
+        };
 
-        element.valid = this.checkValidity(element.value, element.validation);
+        const updatedElement = updatedOrderForm[elementIdentifier];
 
-        // console.log(this.state.orderForm.zipCode.valid);
+        updatedElement.value = event.target.value;
 
-        let formIsValid;
+        updatedElement.valid = this.checkValidity(
+            updatedElement.value,
+            updatedElement.validation
+        );
 
-        formIsValid = Object.keys(this.state.orderForm)
-            .map(key => this.state.orderForm[key].valid)
+        let formIsValid = Object.keys(updatedOrderForm)
+            .map(key => updatedOrderForm[key].valid)
             .every(validity => validity);
 
         this.setState({
+            formIsValid: formIsValid,
             orderForm: {
                 ...updatedOrderForm
-            },
-            formIsValid
+            }
         });
     };
 }
@@ -198,13 +211,23 @@ class ContactData extends Component {
 const mapStateToProps = state => ({
     ingredients: state.burger.ingredients,
     price: state.burger.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token,
+    userId: state.auth.userId
 });
 
 const mapDispatchToProps = dispatch => {
     return {
-        orderHandler: (formInfo, ings, price) =>
-            dispatch(actionCreators.orderSubmited(formInfo, ings, price))
+        orderHandler: (formInfo, ings, price, userId, token) =>
+            dispatch(
+                actionCreators.orderSubmited(
+                    formInfo,
+                    ings,
+                    price,
+                    userId,
+                    token
+                )
+            )
     };
 };
 
