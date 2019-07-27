@@ -1,24 +1,24 @@
 .CheckoutSummary {
-  width: 80%;
-  text-align: center;
-  margin: auto;
+    width: 80%;
+    text-align: center;
+    margin: auto;
 }
 
 .Burger {
-  width: 100%;
-  margin: 1rem auto;
-  box-sizing: border-box;
-  display: block;
+    width: 100%;
+    margin: 1rem auto;
+    box-sizing: border-box;
+    display: block;
 }
 
-@media (min-width: 37.5em) {
+/* @media (min-width: 37.5em) {
   .CheckoutSummary {
     width: 30rem;
   }
-}
-
+} */
+/* 
 @media (min-width: 62.5rem) {
-  .CheckoutSummary {
-    width: 43.75rem;
-  }
-}
+    .CheckoutSummary {
+        width: 43.75rem;
+    }
+} */

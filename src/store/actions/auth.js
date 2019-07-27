@@ -1,6 +1,5 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios-auth";
-import { tsConstructorType } from "@babel/types";
 
 export const authStart = () => {
     return {

@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from "../../utils/utility";
 
 const initialState = {
     token: null,
@@ -11,39 +12,24 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.AUTH_START:
-            return {
-                ...state,
-                loading: true
-            };
+            return updateObject(state, { loading: true });
 
         case actionTypes.AUTH_SUCCEED:
-            return {
-                ...state,
+            return updateObject(state, {
                 token: action.idToken,
                 userId: action.userId,
                 error: null,
                 loading: false
-            };
+            });
 
         case actionTypes.AUTH_FAILED:
-            return {
-                ...state,
-                error: action.error,
-                loading: false
-            };
+            return updateObject(state, { error: action.error, loading: false });
 
         case actionTypes.AUTH_LOGOUT:
-            return {
-                ...state,
-                token: null,
-                userId: null
-            };
+            return updateObject(state, { token: null, userId: null });
 
         case actionTypes.SET_AUTH_REDIRECT_PATH:
-            return {
-                ...state,
-                redirectPath: action.path
-            };
+            return updateObject(state, { redirectPath: action.path });
 
         default:
             return state;

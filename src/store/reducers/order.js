@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from "../../utils/utility";
 
 const initialState = {
     form: {
@@ -16,38 +17,30 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.PURCHASE_BURGER_START:
+            return updateObject(state, { loading: true });
+
         case actionTypes.PURCHASE_BURGER_FAILED:
-            return {
-                ...state,
-                loading: false
-            };
+            return updateObject(state, { loading: false });
+
         case actionTypes.PURCHASE_BURGER_SUCCEED:
-            return {
-                ...state,
-                purchased: true
-            };
+            return updateObject(state, { loading: false, purchased: true });
+
         case actionTypes.PURCHASE_BURGER_INIT:
-            return {
-                ...state,
-                purchased: false
-            };
+            return updateObject(state, { purchased: false, loading: false });
+
         case actionTypes.FETCH_ORDERS_INIT:
-            return {
-                ...state,
-                loading: true
-            };
+            return updateObject(state, { loading: true });
 
         case actionTypes.FETCH_ORDERS_SUCCEED:
-            return {
-                ...state,
+            return updateObject(state, {
                 loading: false,
                 results: action.orders
-            };
+            });
+
         case actionTypes.FETCH_ORDERS_FAILED:
-            return {
-                ...state,
-                loading: false
-            };
+            return updateObject(state, { loading: false });
+
         default:
             return state;
     }

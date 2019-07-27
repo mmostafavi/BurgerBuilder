@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Button from "../../../components/UI/Button/Button";
 import Input from "../../../components/UI/Input/Input";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import { checkValidity } from "../../../utils/utility";
 import * as actionCreators from "../../../store/actions/index";
 
 import styles from "./ContactData.module.css";
@@ -48,7 +49,8 @@ class ContactData extends Component {
                 validation: {
                     required: true,
                     minLength: 5,
-                    maxLength: 5
+                    maxLength: 5,
+                    isNumeric: true
                 },
                 valid: true,
                 touched: false
@@ -74,7 +76,8 @@ class ContactData extends Component {
                 },
                 value: "",
                 validation: {
-                    required: true
+                    required: true,
+                    isEmail: true
                 },
                 valid: false,
                 touched: false
@@ -150,28 +153,6 @@ class ContactData extends Component {
         );
     }
 
-    checkValidity = (value, rules) => {
-        let isValid = true;
-
-        if (!rules) {
-            return true;
-        }
-
-        if (rules.required) {
-            isValid = value.trim() !== "" && isValid;
-        }
-
-        if (rules.minLength) {
-            isValid = value.lenght >= rules.minLength && isValid;
-        }
-
-        if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength && isValid;
-        }
-
-        return isValid;
-    };
-
     inputChangedHandler = (event, elementIdentifier) => {
         const updatedOrderForm = {
             ...this.state.orderForm,
@@ -188,9 +169,11 @@ class ContactData extends Component {
 
         const updatedElement = updatedOrderForm[elementIdentifier];
 
+        updatedElement.touched = true;
+
         updatedElement.value = event.target.value;
 
-        updatedElement.valid = this.checkValidity(
+        updatedElement.valid = checkValidity(
             updatedElement.value,
             updatedElement.validation
         );
