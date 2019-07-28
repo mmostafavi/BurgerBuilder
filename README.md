@@ -1,4 +1,4 @@
-A Burger Builder that made for making tasty Burgers!😋🍔
+A Burger Builder that was made for making tasty Burgers!😋🍔
 
 feel free to download code and add your favourite functionalities ! 💻
 
