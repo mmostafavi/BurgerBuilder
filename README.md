@@ -1,4 +1,8 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Burger Builder that made for making tasty Burgers!😋🍔
+
+feel free to download code and add your favourite functionalities ! 💻
+
+##
 
 ## Available Scripts
 
