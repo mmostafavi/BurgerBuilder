@@ -14,13 +14,7 @@ const order = props => {
       //   ")"
       <span
         key={key}
-        style={{
-          boxSizing: "border-box",
-          border: "1px solid black",
-          margin: "0 0.2rem",
-          padding: "0.3rem",
-          textTransform: "capitalize"
-        }}
+        className={styles.OrderIng}
       >
         {key}({+props.ingredients[key]})
       </span>
@@ -29,7 +23,10 @@ const order = props => {
 
   return (
     <div className={styles.Order}>
-      <p>Ingredients: {ingredients}</p>
+      <p>Ingredients: </p>
+        <div className={styles.OrderIngs}>
+            {ingredients}
+        </div>
       <p>Price: {props.price} USD</p>
     </div>
   );

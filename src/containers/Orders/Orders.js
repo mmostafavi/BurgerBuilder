@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
+import styles from "./Orders.module.css"
 import Order from "../../components/Order/Order/Order";
 import axios from "../../axios-orders";
 import Spinner from "../../components/UI/Spinner/Spinner";
@@ -18,16 +19,19 @@ class Orders extends Component {
 
     render() {
         let orders = this.props.results ? (
-            this.props.results.map(order => {
-                return (
+                <div className={styles.Orders}>
+                    {this.props.results.map(order => {
+                    return (
                     <Order
                         key={order.id}
                         ingredients={order.ingredients}
                         price={order.price}
                     />
-                );
-            })
-        ) : (
+                    );
+                })}
+                </div>
+            )
+         : (
             <p style={{ textAlign: "center" }}>No order registered yet!</p>
         );
 

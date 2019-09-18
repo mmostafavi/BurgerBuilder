@@ -43,7 +43,8 @@ class ContactData extends Component {
                 elementType: "input",
                 elementConfig: {
                     type: "input",
-                    placeholder: "ZipCode"
+                    placeholder: "ZipCode (should be 5 digit)"
+
                 },
                 value: "",
                 validation: {

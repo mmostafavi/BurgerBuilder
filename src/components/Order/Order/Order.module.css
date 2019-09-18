@@ -1,11 +1,40 @@
 .Order {
-  width: 80%;
+  width: 95%;
   margin: 0.625rem auto;
   padding: 0.625rem;
   box-sizing: border-box;
   border: 1px solid #ccc;
   box-shadow: 2px 2px 4px #ccc;
   text-align: center;
+}
+
+.OrderIngs {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 2rem 2rem;
+  grid-gap: 0.5rem 1rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.OrderIng {
+  box-sizing: border-box;
+  border: 1px solid black;
+  margin: 0 0.2rem;
+  padding: 0.3rem;
+  text-transform: capitalize
+}
+
+@media screen and (min-width: 32.5rem){
+  .OrderIngs {
+    grid-template-columns: repeat(4 , 6rem);
+    grid-template-rows: 2rem;
+    grid-gap: 0 1rem;
+  }
+
+  .Order {
+    width: 29.25rem;
+  }
 }
 
 @media (min-width: 37.5rem) {
